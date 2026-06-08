@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-brand: 249 115 22; /* orange-500 */
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased;
+  }
+
+  /* Improve focus ring visibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-500;
+  }
+}
+
+@layer components {
+  /* ── Container ──────────────────────────────────── */
+  .section-container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* ── Section spacing ────────────────────────────── */
+  .section-py {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  /* ── Headings ───────────────────────────────────── */
+  .heading-xl {
+    @apply text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl;
+  }
+
+  .heading-lg {
+    @apply text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl lg:text-4xl;
+  }
+
+  .heading-md {
+    @apply text-xl font-bold tracking-tight text-gray-900 sm:text-2xl;
+  }
+
+  .subheading {
+    @apply mt-4 text-base text-gray-600 sm:text-lg lg:text-xl;
+  }
+
+  /* ── Buttons ────────────────────────────────────── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-brand-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-brand-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:scale-[0.98] sm:text-base;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-lg border-2 border-white bg-transparent px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-white hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98] sm:text-base;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 transition-colors duration-200 hover:bg-gray-100;
+  }
+
+  /* ── Form inputs ────────────────────────────────── */
+  .input-field {
+    @apply block w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 shadow-sm transition-colors duration-200 placeholder:text-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none;
+  }
+
+  .input-label {
+    @apply mb-1.5 block text-sm font-medium text-gray-700;
+  }
+
+  /* ── Card ───────────────────────────────────────── */
+  .card {
+    @apply overflow-hidden rounded-2xl bg-white shadow-md transition-shadow duration-300 hover:shadow-lg;
+  }
+}
+
+@layer utilities {
+  /* ── Gradient overlays ──────────────────────────── */
+  .overlay-dark {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.7));
+  }
+
+  .overlay-darker {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.85));
+  }
+
+  /* ── Text balance for headings ──────────────────── */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
