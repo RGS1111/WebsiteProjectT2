@@ -3,6 +3,7 @@ import { metadata as siteMeta } from "@/config/site-config";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
+import WhatsAppFAB from "@/components/ui/WhatsAppFAB";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -53,21 +54,29 @@ export default function RootLayout({
   return (
     <html lang="en-GB">
       <head>
-        {/* Preconnect to Google fonts for performance */}
+        {/* Preconnect for Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* Premium font pairing:
+            - Inter: Clean, modern body font (400, 500, 600, 700)
+            - Playfair Display: Elegant, high-contrast headline serif (600, 700, 800)
+        */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap"
           rel="stylesheet"
         />
 
         {/* JSON-LD Schema — LocalBusiness on every page for NAP consistency */}
         <LocalBusinessSchema />
       </head>
-      <body className="flex min-h-screen flex-col bg-white text-gray-900 antialiased">
+      <body className="flex min-h-screen flex-col bg-white text-gray-900 antialiased font-sans">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+
+        {/* Floating WhatsApp chat button — visible on all pages */}
+        <WhatsAppFAB />
       </body>
     </html>
   );

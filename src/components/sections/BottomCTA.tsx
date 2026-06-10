@@ -2,6 +2,7 @@
 
 import { globalUI, companyDetails } from "@/config/site-config";
 import { useState, type FormEvent } from "react";
+import BusinessHoursWrapper from "@/components/ui/BusinessHoursWrapper";
 
 export default function BottomCTA() {
   const { heading, subheading, form } = globalUI.bottomCTA;
@@ -43,59 +44,61 @@ export default function BottomCTA() {
           <p className="mt-3 text-lg text-white/80">{subheading}</p>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="mx-auto mt-10 max-w-2xl rounded-2xl bg-white p-6 shadow-xl sm:p-8"
-        >
-          <div className="grid gap-5 sm:grid-cols-3">
-            {form.fields.map((field) => (
-              <div key={field.name}>
-                <label htmlFor={`cta-${field.name}`} className="input-label">
-                  {field.label}
+        <BusinessHoursWrapper position="top">
+          <form
+            onSubmit={handleSubmit}
+            className="mx-auto mt-10 max-w-2xl rounded-2xl bg-white p-6 shadow-xl sm:p-8"
+          >
+            <div className="grid gap-5 sm:grid-cols-3">
+              {form.fields.map((field) => (
+                <div key={field.name}>
+                  <label htmlFor={`cta-${field.name}`} className="input-label">
+                    {field.label}
+                  </label>
+                  <input
+                    id={`cta-${field.name}`}
+                    type={field.type}
+                    required={field.required}
+                    placeholder={field.placeholder}
+                    className="input-field"
+                    value={formData[field.name as keyof typeof formData] ?? ""}
+                    onChange={(e) =>
+                      setFormData((prev) => ({ ...prev, [field.name]: e.target.value }))
+                    }
+                  />
+                </div>
+              ))}
+              <div className="sm:col-span-3">
+                <label htmlFor="cta-jobType" className="input-label">
+                  Job Type
                 </label>
-                <input
-                  id={`cta-${field.name}`}
-                  type={field.type}
-                  required={field.required}
-                  placeholder={field.placeholder}
+                <select
+                  id="cta-jobType"
+                  required
                   className="input-field"
-                  value={formData[field.name as keyof typeof formData] ?? ""}
+                  value={formData.jobType}
                   onChange={(e) =>
-                    setFormData((prev) => ({ ...prev, [field.name]: e.target.value }))
+                    setFormData((prev) => ({ ...prev, jobType: e.target.value }))
                   }
-                />
+                >
+                  {form.jobTypes.map((jt) => (
+                    <option key={jt} value={jt}>
+                      {jt}
+                    </option>
+                  ))}
+                </select>
               </div>
-            ))}
-            <div className="sm:col-span-3">
-              <label htmlFor="cta-jobType" className="input-label">
-                Job Type
-              </label>
-              <select
-                id="cta-jobType"
-                required
-                className="input-field"
-                value={formData.jobType}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, jobType: e.target.value }))
-                }
-              >
-                {form.jobTypes.map((jt) => (
-                  <option key={jt} value={jt}>
-                    {jt}
-                  </option>
-                ))}
-              </select>
             </div>
-          </div>
 
-          <button type="submit" className="btn-primary mt-6 w-full py-3.5 text-base">
-            {form.submitText}
-          </button>
+            <button type="submit" className="btn-primary mt-6 w-full py-3.5 text-base">
+              {form.submitText}
+            </button>
 
-          <p className="mt-3 text-center text-xs text-gray-500">
-            No spam, no obligation. We respect your privacy.
-          </p>
-        </form>
+            <p className="mt-3 text-center text-xs text-gray-500">
+              No spam, no obligation. We respect your privacy.
+            </p>
+          </form>
+        </BusinessHoursWrapper>
       </div>
     </section>
   );

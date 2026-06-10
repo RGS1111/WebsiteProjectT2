@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import BusinessHoursWrapper from "@/components/ui/BusinessHoursWrapper";
 
 interface FormField {
   name: string;
@@ -54,82 +55,84 @@ export default function ContactForm({ form }: ContactFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl bg-white p-6 shadow-lg sm:p-8">
-      <div className="grid gap-5 sm:grid-cols-2">
-        {form.fields.map((field) => {
-          if (field.type === "textarea") {
-            return (
-              <div key={field.name} className="sm:col-span-2">
-                <label htmlFor={`contact-${field.name}`} className="input-label">
-                  {field.label}
-                </label>
-                <textarea
-                  id={`contact-${field.name}`}
-                  name={field.name}
-                  required={field.required}
-                  rows={4}
-                  placeholder={field.placeholder}
-                  className="input-field resize-y"
-                  value={formData[field.name] ?? ""}
-                  onChange={(e) => handleChange(field.name, e.target.value)}
-                />
-              </div>
-            );
-          }
+    <BusinessHoursWrapper position="top">
+      <form onSubmit={handleSubmit} className="rounded-2xl bg-white p-6 shadow-lg sm:p-8">
+        <div className="grid gap-5 sm:grid-cols-2">
+          {form.fields.map((field) => {
+            if (field.type === "textarea") {
+              return (
+                <div key={field.name} className="sm:col-span-2">
+                  <label htmlFor={`contact-${field.name}`} className="input-label">
+                    {field.label}
+                  </label>
+                  <textarea
+                    id={`contact-${field.name}`}
+                    name={field.name}
+                    required={field.required}
+                    rows={4}
+                    placeholder={field.placeholder}
+                    className="input-field resize-y"
+                    value={formData[field.name] ?? ""}
+                    onChange={(e) => handleChange(field.name, e.target.value)}
+                  />
+                </div>
+              );
+            }
 
-          if (field.type === "select") {
+            if (field.type === "select") {
+              return (
+                <div key={field.name}>
+                  <label htmlFor={`contact-${field.name}`} className="input-label">
+                    {field.label}
+                  </label>
+                  <select
+                    id={`contact-${field.name}`}
+                    name={field.name}
+                    required={field.required}
+                    className="input-field"
+                    value={formData[field.name] ?? ""}
+                    onChange={(e) => handleChange(field.name, e.target.value)}
+                  >
+                    <option value="">Select job type...</option>
+                    {form.jobTypes.map((jt) => (
+                      <option key={jt} value={jt}>
+                        {jt}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              );
+            }
+
             return (
               <div key={field.name}>
                 <label htmlFor={`contact-${field.name}`} className="input-label">
                   {field.label}
                 </label>
-                <select
+                <input
                   id={`contact-${field.name}`}
+                  type={field.type}
                   name={field.name}
                   required={field.required}
+                  placeholder={field.placeholder}
                   className="input-field"
                   value={formData[field.name] ?? ""}
                   onChange={(e) => handleChange(field.name, e.target.value)}
-                >
-                  <option value="">Select job type...</option>
-                  {form.jobTypes.map((jt) => (
-                    <option key={jt} value={jt}>
-                      {jt}
-                    </option>
-                  ))}
-                </select>
+                />
               </div>
             );
-          }
+          })}
+        </div>
 
-          return (
-            <div key={field.name}>
-              <label htmlFor={`contact-${field.name}`} className="input-label">
-                {field.label}
-              </label>
-              <input
-                id={`contact-${field.name}`}
-                type={field.type}
-                name={field.name}
-                required={field.required}
-                placeholder={field.placeholder}
-                className="input-field"
-                value={formData[field.name] ?? ""}
-                onChange={(e) => handleChange(field.name, e.target.value)}
-              />
-            </div>
-          );
-        })}
-      </div>
+        <button type="submit" className="btn-primary mt-6 w-full py-3.5 text-base">
+          {form.submitText}
+        </button>
 
-      <button type="submit" className="btn-primary mt-6 w-full py-3.5 text-base">
-        {form.submitText}
-      </button>
-
-      <p className="mt-3 text-center text-xs text-gray-500">
-        We respect your privacy. No spam, no obligation — just a free,
-        honest quote from a local roofing expert.
-      </p>
-    </form>
+        <p className="mt-3 text-center text-xs text-gray-500">
+          We respect your privacy. No spam, no obligation — just a free,
+          honest quote from a local roofing expert.
+        </p>
+      </form>
+    </BusinessHoursWrapper>
   );
 }
