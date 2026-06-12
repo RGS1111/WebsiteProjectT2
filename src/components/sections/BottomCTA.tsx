@@ -80,7 +80,7 @@ export default function BottomCTA() {
           <p className="mt-3 text-lg text-white/80">{subheading}</p>
         </div>
 
-        <BusinessHoursWrapper position="top">
+        <BusinessHoursWrapper position="top" className="!block w-full">
           <form
             onSubmit={handleSubmit}
             className="mx-auto mt-10 max-w-2xl rounded-2xl bg-white p-6 shadow-xl sm:p-8"
