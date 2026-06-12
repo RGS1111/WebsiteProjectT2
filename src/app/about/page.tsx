@@ -38,7 +38,7 @@ export default function AboutPage() {
             {story.paragraphs.map((paragraph, idx) => (
               <p
                 key={idx}
-                className={`text-base leading-relaxed text-gray-600 sm:text-lg ${
+                className={`text-base leading-relaxed text-gray-700 sm:text-lg ${
                   idx > 0 ? "mt-6" : ""
                 }`}
               >
@@ -59,13 +59,13 @@ export default function AboutPage() {
               <div key={member.name} className="card p-6 text-center">
                 <img
                   src={member.image}
-                  alt={member.name}
+                  alt={`${member.name}, ${member.role} at Elite Roofing Nottingham`}
                   className="mx-auto h-28 w-28 rounded-full object-cover shadow-md"
                   loading="lazy"
                 />
                 <h3 className="mt-4 text-lg font-semibold text-gray-900">{member.name}</h3>
                 <p className="text-sm font-medium text-brand-600">{member.role}</p>
-                <p className="mt-3 text-sm leading-relaxed text-gray-600">{member.bio}</p>
+                <p className="mt-3 text-sm leading-relaxed text-gray-700">{member.bio}</p>
               </div>
             ))}
           </div>
@@ -89,7 +89,7 @@ export default function AboutPage() {
                   />
                 </div>
                 <h3 className="mt-4 text-sm font-semibold text-gray-900">{item.name}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-gray-500">{item.description}</p>
+                <p className="mt-2 text-xs leading-relaxed text-gray-600">{item.description}</p>
               </div>
             ))}
           </div>
@@ -110,19 +110,19 @@ export default function AboutPage() {
                 key={area.name}
                 className="flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm"
               >
-                <svg className="h-5 w-5 shrink-0 text-brand-600" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                <svg className="h-5 w-5 shrink-0 text-brand-700" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
                 <div>
                   <p className="text-sm font-semibold text-gray-900">{area.name}</p>
-                  <p className="text-xs text-gray-500">{area.postcodes}</p>
+                  <p className="text-xs text-gray-600">{area.postcodes}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <p className="mt-8 text-center text-sm text-gray-500">
+          <p className="mt-8 text-center text-sm text-gray-600">
             Don&apos;t see your area? Call us — we may still cover your location.
           </p>
         </div>

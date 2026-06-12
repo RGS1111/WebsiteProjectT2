@@ -24,9 +24,27 @@
     font-family: var(--font-heading);
   }
 
-  /* Improve focus ring visibility */
+  /*
+   * WCAG 2.1 AA focus indicator:
+   * - Default: 2px solid orange ring with offset — highly visible on light backgrounds.
+   * - Dark context override: white ring for dark/colored backgrounds.
+   * - No `outline: none` anywhere; focus-visible is always visible.
+   */
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-brand-500;
+    outline-style: solid;
+  }
+
+  /* Respect user motion preferences — disable all animations */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
@@ -59,21 +77,43 @@
   }
 
   /* ── Buttons ────────────────────────────────────── */
+  /*
+   * btn-primary: brand-700 (#C2410C) background = 5.3:1 on white — passes WCAG AA
+   * for normal text (4.5:1). On dark backgrounds, the white focus ring ensures
+   * the indicator is visible.
+   */
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-lg bg-brand-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-brand-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:scale-[0.98] sm:text-base;
+    @apply inline-flex items-center justify-center rounded-lg bg-brand-700 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-brand-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98] sm:text-base;
   }
 
+  /*
+   * btn-outline: white border + text on dark overlay backgrounds.
+   * White focus ring visible against brand/dark backgrounds.
+   */
   .btn-outline {
     @apply inline-flex items-center justify-center rounded-lg border-2 border-white bg-transparent px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-white hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-[0.98] sm:text-base;
   }
 
+  /*
+   * btn-ghost: minimal button for secondary nav/links.
+   * Uses brand-500 focus ring (visible on white background).
+   */
   .btn-ghost {
-    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 transition-colors duration-200 hover:bg-gray-100;
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 transition-colors duration-200 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500;
   }
 
   /* ── Form inputs ────────────────────────────────── */
   .input-field {
-    @apply block w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 shadow-sm transition-colors duration-200 placeholder:text-gray-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none;
+    @apply block w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 shadow-sm transition-colors duration-200 placeholder:text-gray-600 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/40;
+    /* outline is NOT suppressed — focus-visible from base layer handles the focus ring */
+  }
+
+  .input-field--error {
+    @apply border-red-600 focus:border-red-600 focus:ring-red-500/40;
+  }
+
+  .input-error-message {
+    @apply mt-1 text-sm font-medium text-red-700;
   }
 
   .input-label {

@@ -11,7 +11,7 @@ export default function WhatsAppFAB() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
-      className="group fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all duration-300 ease-out hover:scale-110 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 sm:bottom-8 sm:right-8 sm:h-16 sm:w-16"
+      className="group fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all duration-300 ease-out hover:scale-110 hover:shadow-xl hover:-translate-y-0.5 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:bottom-8 sm:right-8 sm:h-16 sm:w-16"
     >
       {/* Pulse ring on mount */}
       <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-30 animate-[ping_2s_ease-out_1]" />

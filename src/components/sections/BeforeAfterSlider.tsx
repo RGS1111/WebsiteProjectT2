@@ -23,6 +23,7 @@ export default function BeforeAfterSlider({
 }: BeforeAfterSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
+  const handleRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
 
   const updatePosition = useCallback((clientX: number) => {
@@ -34,6 +35,38 @@ export default function BeforeAfterSlider({
 
   function handleMouseDown() {
     dragging.current = true;
+  }
+
+  /*
+   * WCAG 2.1 AA — Keyboard operable (2.1.1)
+   * Arrow keys move the slider handle by 5% increments.
+   * Home/End move to 0%/100%.
+   */
+  function handleKeyDown(e: React.KeyboardEvent) {
+    let newPos = sliderPosition;
+    switch (e.key) {
+      case "ArrowLeft":
+      case "ArrowDown":
+        e.preventDefault();
+        newPos = Math.max(0, sliderPosition - 5);
+        break;
+      case "ArrowRight":
+      case "ArrowUp":
+        e.preventDefault();
+        newPos = Math.min(100, sliderPosition + 5);
+        break;
+      case "Home":
+        e.preventDefault();
+        newPos = 0;
+        break;
+      case "End":
+        e.preventDefault();
+        newPos = 100;
+        break;
+      default:
+        return;
+    }
+    setSliderPosition(newPos);
   }
 
   useEffect(() => {
@@ -68,7 +101,7 @@ export default function BeforeAfterSlider({
   return (
     <div className={cn("overflow-hidden rounded-xl", className)}>
       {label && (
-        <p className="mb-2 text-center text-sm font-semibold text-gray-700">{label}</p>
+        <p className="mb-2 text-center text-sm font-semibold text-gray-900">{label}</p>
       )}
       <div
         ref={containerRef}
@@ -96,15 +129,24 @@ export default function BeforeAfterSlider({
           />
         </div>
 
-        {/* Slider handle */}
+        {/* Slider handle — keyboard accessible via role + tabIndex */}
         <div
-          className="absolute top-0 h-full w-1 cursor-ew-resize bg-white shadow-lg"
+          ref={handleRef}
+          role="slider"
+          tabIndex={0}
+          aria-label="Before and after comparison slider"
+          aria-valuenow={Math.round(sliderPosition)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuetext={`${Math.round(sliderPosition)}% before visible`}
+          className="absolute top-0 h-full w-1 cursor-ew-resize bg-white shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-white"
           style={{ left: `${sliderPosition}%` }}
           onMouseDown={handleMouseDown}
           onTouchStart={handleMouseDown}
+          onKeyDown={handleKeyDown}
         >
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white p-1.5 shadow-md">
-            <svg className="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <svg className="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
             </svg>
           </div>
@@ -114,7 +156,7 @@ export default function BeforeAfterSlider({
         <span className="absolute left-3 top-3 rounded-full bg-black/60 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
           Before
         </span>
-        <span className="absolute right-3 top-3 rounded-full bg-brand-600/80 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+        <span className="absolute right-3 top-3 rounded-full bg-brand-700/80 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
           After
         </span>
       </div>

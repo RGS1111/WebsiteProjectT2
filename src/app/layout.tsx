@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
 import WhatsAppFAB from "@/components/ui/WhatsAppFAB";
+import SkipToContent from "@/components/ui/SkipToContent";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -71,8 +72,9 @@ export default function RootLayout({
         <LocalBusinessSchema />
       </head>
       <body className="flex min-h-screen flex-col bg-white text-gray-900 antialiased font-sans">
+        <SkipToContent />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">{children}</main>
         <Footer />
 
         {/* Floating WhatsApp chat button — visible on all pages */}

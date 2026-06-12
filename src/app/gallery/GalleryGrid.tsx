@@ -34,16 +34,17 @@ export default function GalleryGrid({ filters, projects }: GalleryGridProps) {
   return (
     <>
       {/* Filter bar */}
-      <div className="mb-12 flex flex-wrap justify-center gap-2">
+      <div className="mb-12 flex flex-wrap justify-center gap-2" role="group" aria-label="Project category filters">
         {filters.map((filter) => (
           <button
             key={filter.id}
             type="button"
             onClick={() => setActiveFilter(filter.id)}
+            aria-pressed={activeFilter === filter.id}
             className={cn(
-              "rounded-full px-5 py-2 text-sm font-medium transition-all duration-200",
+              "rounded-full px-5 py-2 text-sm font-medium transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500",
               activeFilter === filter.id
-                ? "bg-brand-600 text-white shadow-md"
+                ? "bg-brand-700 text-white shadow-md"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             )}
           >
@@ -55,7 +56,7 @@ export default function GalleryGrid({ filters, projects }: GalleryGridProps) {
       {/* Grid */}
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
         {filtered.length === 0 ? (
-          <p className="col-span-full py-12 text-center text-gray-500">
+          <p className="col-span-full py-12 text-center text-gray-600">
             No projects found for this category. Please check back soon or
             contact us for recent examples.
           </p>
@@ -99,11 +100,11 @@ export default function GalleryGrid({ filters, projects }: GalleryGridProps) {
                   <h3 className="text-base font-semibold text-gray-900">
                     {project.jobType}
                   </h3>
-                  <span className="rounded bg-brand-50 px-2 py-0.5 text-xs font-medium text-brand-700">
+                  <span className="rounded bg-brand-50 px-2 py-0.5 text-xs font-medium text-brand-800">
                     {project.location}
                   </span>
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                <p className="mt-2 text-sm leading-relaxed text-gray-700">
                   {project.description}
                 </p>
               </div>

@@ -49,7 +49,7 @@ export default function ServicesPage() {
           <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl text-balance">
             {intro.heading}
           </h1>
-          <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-gray-300 sm:text-lg">
+          <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-gray-200 sm:text-lg">
             {intro.subheading}
           </p>
         </div>
@@ -90,7 +90,7 @@ export default function ServicesPage() {
                   <div className="flex items-center gap-3">
                     {Icon && (
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-100">
-                        <Icon className="h-5 w-5 text-brand-700" />
+                        <Icon className="h-5 w-5 text-brand-700" aria-hidden="true" />
                       </div>
                     )}
                     <h2
@@ -101,7 +101,7 @@ export default function ServicesPage() {
                     </h2>
                   </div>
 
-                  <p className="mt-4 text-base leading-relaxed text-gray-600">
+                  <p className="mt-4 text-base leading-relaxed text-gray-700">
                     {service.description}
                   </p>
 
@@ -109,7 +109,7 @@ export default function ServicesPage() {
                   <ul className="mt-5 space-y-2">
                     {service.bullets.map((bullet) => (
                       <li key={bullet} className="flex items-start gap-2 text-sm text-gray-700">
-                        <svg className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                        <svg className="mt-0.5 h-4 w-4 shrink-0 text-brand-700" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
                         {bullet}

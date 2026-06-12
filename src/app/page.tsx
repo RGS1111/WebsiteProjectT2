@@ -45,7 +45,7 @@ export default function HomePage() {
           <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-white text-balance sm:text-4xl lg:text-5xl xl:text-6xl">
             {hero.headline}
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-200 sm:text-lg lg:text-xl">
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-100 sm:text-lg lg:text-xl">
             {hero.subheadline}
           </p>
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-5">
@@ -59,7 +59,7 @@ export default function HomePage() {
                 href={`tel:${phone.raw}`}
                 className="btn-outline px-8 py-4 text-base sm:text-lg"
               >
-                <svg className="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <svg className="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                 </svg>
                 {phone.display}
@@ -89,7 +89,7 @@ export default function HomePage() {
           <div className="mt-10 text-center">
             <Link href="/services" className="btn-primary">
               View All Services
-              <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
             </Link>
@@ -115,9 +115,9 @@ export default function HomePage() {
             {googleReviewsStrip.featuredReviews.map((review, idx) => (
               <div key={idx} className="card p-6">
                 {/* Stars */}
-                <div className="flex gap-0.5 text-brand-500" aria-label="5 out of 5 stars">
+                <div className="flex gap-0.5 text-brand-500" aria-label="5 out of 5 stars" role="img">
                   {"★★★★★".split("").map((s, i) => (
-                    <span key={i}>{s}</span>
+                    <span key={i} aria-hidden="true">{s}</span>
                   ))}
                 </div>
                 <p className="mt-4 text-sm leading-relaxed text-gray-600">
@@ -125,7 +125,7 @@ export default function HomePage() {
                 </p>
                 <div className="mt-4 border-t pt-4">
                   <p className="text-sm font-semibold text-gray-900">{review.name}</p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-600">
                     {review.location} — {review.jobType}
                   </p>
                 </div>
@@ -134,7 +134,7 @@ export default function HomePage() {
           </div>
 
           <div className="mt-10 text-center">
-            <Link href="/reviews" className="btn-ghost text-brand-600 hover:text-brand-700">
+            <Link href="/reviews" className="btn-ghost text-brand-700 hover:text-brand-800">
               Read all 120+ reviews →
             </Link>
           </div>
@@ -163,7 +163,7 @@ export default function HomePage() {
           <div className="mt-10 text-center">
             <Link href="/gallery" className="btn-primary">
               View Full Gallery
-              <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
             </Link>
@@ -184,10 +184,10 @@ export default function HomePage() {
               return (
                 <div key={feature.icon} className="text-center">
                   <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-50">
-                    {Icon && <Icon className="h-7 w-7 text-brand-600" />}
+                    {Icon && <Icon className="h-7 w-7 text-brand-700" aria-hidden="true" />}
                   </div>
                   <h3 className="mt-5 text-lg font-semibold text-gray-900">{feature.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-gray-600">{feature.description}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-700">{feature.description}</p>
                 </div>
               );
             })}

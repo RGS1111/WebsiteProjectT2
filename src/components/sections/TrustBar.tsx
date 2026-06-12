@@ -14,9 +14,9 @@ export default function TrustBar() {
             return (
               <div
                 key={item.icon}
-                className="flex items-center gap-2 text-sm font-medium text-gray-300"
+                className="flex items-center gap-2 text-sm font-medium text-gray-200"
               >
-                {Icon && <Icon className="h-4 w-4 text-brand-400" />}
+                {Icon && <Icon className="h-4 w-4 text-brand-400" aria-hidden="true" />}
                 <span>
                   {item.text === "Covering Nottingham & Surrounding Areas"
                     ? `Covering ${regionsShort}`

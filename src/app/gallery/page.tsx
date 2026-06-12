@@ -29,15 +29,16 @@ export default function GalleryPage() {
           <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl text-balance">
             {heading}
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-300 sm:text-lg">
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-200 sm:text-lg">
             {subheading}
           </p>
         </div>
       </section>
 
       {/* ── FILTERABLE GALLERY ──────────────────────── */}
-      <section className="section-py bg-white">
+      <section className="section-py bg-white" aria-labelledby="gallery-grid-heading">
         <div className="section-container">
+          <h2 id="gallery-grid-heading" className="sr-only">Project Portfolio</h2>
           <GalleryGrid filters={filters} projects={projects} />
         </div>
       </section>
